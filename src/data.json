@@ -1,0 +1,49 @@
+{
+  "data": [
+    {
+      "id": "39d2",
+      "brand": "Toyota",
+      "items": {
+        "model": "crista",
+        "year": "2020",
+        "color": "grey",
+        "insurance": "2022",
+        "location": "chennai",
+        "owners": "1",
+        "fitments": "Tire",
+        "kms": "10000",
+        "transmission": ""
+      }
+    },
+    {
+      "id": "98f7",
+      "brand": "Honda",
+      "items": {
+        "model": "Amaze",
+        "year": "2012",
+        "color": "white",
+        "insurance": "2022",
+        "location": "Chennai",
+        "owners": "2",
+        "fitments": "bumpers",
+        "kms": "100000",
+        "transmission": "Manual"
+      }
+    },
+    {
+      "id": "cc79",
+      "brand": "Honda",
+      "items": {
+        "model": "amaze",
+        "year": "2020",
+        "color": "white",
+        "insurance": "2030",
+        "location": "Banglore",
+        "owners": "3",
+        "fitments": "",
+        "kms": "20000",
+        "transmission": "Manual"
+      }
+    }
+  ]
+}
