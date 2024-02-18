@@ -12,7 +12,9 @@ const CarForm: React.FC<{ onSubmit: (car: brandDetail) => void }> = ({ onSubmit 
         owners: '',
         fitments: '',
         kms: '',
-        transmission: ''
+        fuelType: '',
+        transmission: '',
+        fileURL: ''
     });
 
     const labelData: brandDetail = {
@@ -24,7 +26,9 @@ const CarForm: React.FC<{ onSubmit: (car: brandDetail) => void }> = ({ onSubmit 
         owners: 'No of owners',
         fitments: 'External fitments',
         kms: 'Kms',
-        transmission: 'Transmission'
+        fuelType: "Fuel Type",
+        transmission: 'Transmission',
+        fileURL: 'Upload Image'
 
     }
 
@@ -36,30 +40,65 @@ const CarForm: React.FC<{ onSubmit: (car: brandDetail) => void }> = ({ onSubmit 
         }));
     };
 
+    const fileHandleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files && e.target.files[0];
+        const name = e.target.name;
+        if (file) {
+
+            const reader = new FileReader();
+
+            reader.onload = function () {
+                const result = reader.result as string;
+                setFormData(prevState => ({
+                ...prevState, 
+                [name]: result
+            }));
+            };
+            reader.readAsDataURL(file);
+        }
+    }
+
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         onSubmit(formData);
     };
-      
+
     return (
         <form onSubmit={handleSubmit}>
             {Object.entries(formData).map(([key, value]) => (
                 <div key={key} style={{ marginBottom: '20px' }}>
                     <label htmlFor={key}>{labelData[key as keyof typeof formData]}</label>
-                    <input
-                        type="text"
-                        id={key}
-                        name={key}
-                        value={value}
-                        onChange={handleChange}
-                        style={{
-                            width: '100%',
-                            padding: '10px',
-                            fontSize: '16px',
-                            borderRadius: '5px',
-                            border: '1px solid #ccc',
-                        }}
-                    />
+                    {key !== 'fileURL' ?
+                        (<input
+                            type="text"
+                            id={key}
+                            name={key}
+                            value={value}
+                            onChange={handleChange}
+                            style={{
+                                width: '100%',
+                                padding: '10px',
+                                fontSize: '16px',
+                                borderRadius: '5px',
+                                border: '1px solid #ccc',
+                            }}
+                        />) : (
+                            <>
+                                <input
+                                    type="file"
+                                    id={key}
+                                    name={key}
+                                    onChange={fileHandleChange}
+                                    style={{
+                                        width: '100%',
+                                        padding: '10px',
+                                        fontSize: '16px',
+                                        borderRadius: '5px',
+                                        border: '1px solid #ccc',
+                                    }}
+                                />
+                            </>
+                        )}
                 </div>
             ))}
             <button type="submit" style={styles.submitButton}>Submit</button>

@@ -6,6 +6,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
+### `json-server --watch src/data.json --port 3001`
+
+Runs the json server to use data json for api calls to add, get the car details here.
+
 ### `npm start`
 
 Runs the app in the development mode.\

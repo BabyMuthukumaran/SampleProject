@@ -1,11 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState} from 'react';
 import CarList from './Car/CarList';
 import CarForm from './Car/CarForm';
-import {data} from '../data/carlogodetails';
-import { brandDetail } from '../Interface/CarModel';
-import axios from 'axios';
+import { data } from '../data/carlogodetails';
+import { CarItem, brandDetail } from '../Interface/CarModel';
+import { useDispatch, useSelector } from "react-redux";
+import { addCarItemAsync } from "../slices/reducer";
+import { AppDispatch, RootState } from '../store';
+
+interface ComponentProps {
+  addCarItemAsync: (data: CarItem) => void;
+}
 
 const CarLogo: React.FC = () => {
+   
+  const dispatch = useDispatch<AppDispatch>();
   const [showForm, setShowForm] = useState(false);
   const [selectedModel, setSelectedModel] = useState('');
 
@@ -14,17 +22,10 @@ const CarLogo: React.FC = () => {
     setShowForm(true);
     setSelectedModel(model);
   };
-  
+
   const formSubmit = (carbrand: brandDetail) => {
     setShowForm(false);
-    console.log(carbrand);
-    axios.post("http://localhost:3001/data", {
-      brand: selectedModel,
-      items: carbrand
-    })
-    .then((response) => {
-      console.log(response.data);
-    });
+    dispatch(addCarItemAsync({ brand: selectedModel, items: carbrand } as CarItem));
   }
   return (
     <div>
